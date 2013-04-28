@@ -35,6 +35,7 @@ RepFinder::RepFinder(bb::cascades::Application *app)
     dataModel_ = new GroupDataModel(this);
     dataModel_->setSortingKeys(QStringList() << "displayName");
     dataModel_->setSortedAscending(true);
+    dataModel_->setGrouping(ItemGrouping::None);
 
     ListView *listView = rootPage_->findChild<ListView *>("listView");
     listView->setDataModel(dataModel_);
