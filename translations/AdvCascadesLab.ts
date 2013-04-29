@@ -37,7 +37,7 @@
 <context>
     <name>RepListPage</name>
     <message>
-        <location filename="../assets/RepListPage.qml" line="42"/>
+        <location filename="../assets/RepListPage.qml" line="44"/>
         <source>Load Data</source>
         <translation type="unfinished"></translation>
     </message>

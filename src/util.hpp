@@ -7,7 +7,7 @@
 namespace util
 {
 
-QVariantMap contactToMap(const bb::pim::contacts::Contact &contact);
+QVariantMap contactToMap(const bb::pim::contacts::Contact &contact, bool photoToImage = true);
 
 }
 

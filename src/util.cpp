@@ -6,7 +6,7 @@
 namespace util
 {
 
-QVariantMap contactToMap(const bb::pim::contacts::Contact &contact)
+QVariantMap contactToMap(const bb::pim::contacts::Contact &contact, bool photoToImage)
 {
     QVariantMap map;
 
@@ -58,8 +58,13 @@ QVariantMap contactToMap(const bb::pim::contacts::Contact &contact)
         photoFile.open(QIODevice::ReadOnly);
         const QByteArray photoData = photoFile.readAll();
         if(!photoData.isEmpty()) {
-            bb::cascades::Image image(photoData);
-            map["photo"] = QVariant(qMetaTypeId<bb::cascades::Image>(), &image);
+            if(photoToImage) {
+                bb::cascades::Image image(photoData);
+                map["photo"] = QVariant(qMetaTypeId<bb::cascades::Image>(), &image);
+            }
+            else {
+                map["photoData"] = photoData;
+            }
         }
     }
 

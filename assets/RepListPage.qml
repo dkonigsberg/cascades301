@@ -33,7 +33,9 @@ Page {
             ]
             onTriggered: {
                 var chosenItem = dataModel.data(indexPath)
-                page.showDetails(chosenItem)
+                if(!chosenItem.loading) {
+                    page.showDetails(chosenItem)
+                }
             }
         }
     }

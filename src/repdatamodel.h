@@ -4,7 +4,6 @@
 #include <QtCore/QString>
 #include <QtCore/QVariant>
 #include <bb/cascades/DataModel>
-#include <bb/pim/contacts/ContactService>
 
 class RepDataModel : public bb::cascades::DataModel
 {
@@ -19,11 +18,13 @@ public:
     virtual QString itemType(const QVariantList &indexPath);
     virtual QVariant data(const QVariantList &indexPath);
 
+private slots:
+    void onContactCardParsed();
+
 private:
     Q_DISABLE_COPY(RepDataModel)
     QVariantMap dataForIndex(int index);
     QVariantMap parseContactCard(const QString &vcard);
-    bb::pim::contacts::ContactService contactService_;
     QList<QString> vcardList_;
     QHash<int, QVariantMap> dataMap_;
 };
