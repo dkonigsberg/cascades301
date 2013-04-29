@@ -13,9 +13,13 @@
 #include <bb/pim/contacts/Contact>
 
 #include "util.hpp"
+#include "repdatamodel.h"
 #include "repdetailspage.hpp"
 
 using namespace bb::cascades;
+
+//#define USE_GROUPDATAMODEL
+#define USE_REPDATAMODEL
 
 RepFinder::RepFinder(bb::cascades::Application *app)
     : QObject(app)
@@ -32,13 +36,19 @@ RepFinder::RepFinder(bb::cascades::Application *app)
     connect(rootPage_, SIGNAL(loadData()), this, SLOT(onLoadData()));
     connect(rootPage_, SIGNAL(showDetails(QVariant)), this, SLOT(onShowDetails(QVariant)));
 
-    dataModel_ = new GroupDataModel(this);
-    dataModel_->setSortingKeys(QStringList() << "displayName");
-    dataModel_->setSortedAscending(true);
-    dataModel_->setGrouping(ItemGrouping::None);
+#ifdef USE_GROUPDATAMODEL
+    GroupDataModel *dataModel = new GroupDataModel(this);
+    dataModel->setSortingKeys(QStringList() << "role" << "displayName");
+    dataModel->setSortedAscending(true);
+    dataModel->setGrouping(ItemGrouping::None);
+#endif
+#ifdef USE_REPDATAMODEL
+    RepDataModel *dataModel = new RepDataModel(this);
+#endif
 
     ListView *listView = rootPage_->findChild<ListView *>("listView");
-    listView->setDataModel(dataModel_);
+    listView->setDataModel(dataModel);
+    dataModel_ = dataModel;
 }
 
 void RepFinder::onPopTransitionEnded(bb::cascades::Page *page)
@@ -99,7 +109,9 @@ QList<QString> RepFinder::vcardsFromData(const QByteArray &data)
 
 void RepFinder::populateDataModel(QList<QString> &vcards)
 {
-    dataModel_->clear();
+#ifdef USE_GROUPDATAMODEL
+    GroupDataModel *groupModel = qobject_cast<GroupDataModel *>(dataModel_);
+    groupModel->clear();
 
     bb::pim::contacts::ContactService contactService;
     foreach(const QString &vcard, vcards) {
@@ -107,12 +119,20 @@ void RepFinder::populateDataModel(QList<QString> &vcards)
             contactService.contactFromVCard(vcard);
         if(contact.isValid()) {
             QVariantMap map = util::contactToMap(contact);
-            dataModel_->insert(map);
+            groupModel->insert(map);
         }
         else {
             qWarning() << "Invalid contact";
         }
     }
+#endif
+#ifdef USE_REPDATAMODEL
+    RepDataModel *repModel = qobject_cast<RepDataModel *>(dataModel_);
+    repModel->clear();
+    foreach(const QString &vcard, vcards) {
+        repModel->appendVCard(vcard);
+    }
+#endif
 }
 
 void RepFinder::onShowDetails(const QVariant &dataItem)

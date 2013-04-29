@@ -11,7 +11,7 @@ namespace bb { namespace cascades {
 class Application;
 class NavigationPane;
 class Page;
-class GroupDataModel;
+class DataModel;
 }}
 
 class RepFinder : public QObject
@@ -32,7 +32,7 @@ private:
     void populateDataModel(QList<QString> &vcards);
     bb::cascades::NavigationPane *nav_;
     bb::cascades::Page *rootPage_;
-    bb::cascades::GroupDataModel *dataModel_;
+    bb::cascades::DataModel *dataModel_;
     QNetworkAccessManager accessManager_;
 };
 
