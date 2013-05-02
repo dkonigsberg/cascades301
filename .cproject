@@ -31,7 +31,7 @@
 								<inputType id="com.qnx.qcc.inputType.assembler.1178693386" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.linker.1507634384" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
-								<option id="com.qnx.qcc.option.linker.libraries.1345959812" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
+								<option id="com.qnx.qcc.option.linker.libraries.1345959812" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="bbpim"/>
 								</option>
 							</tool>
@@ -73,7 +73,7 @@
 								<inputType id="com.qnx.qcc.inputType.assembler.1048149620" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.linker.1514032630" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
-								<option id="com.qnx.qcc.option.linker.libraries.715057050" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
+								<option id="com.qnx.qcc.option.linker.libraries.715057050" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="bbpim"/>
 								</option>
 							</tool>
@@ -115,7 +115,7 @@
 								<inputType id="com.qnx.qcc.inputType.assembler.954941369" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.linker.1167731949" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
-								<option id="com.qnx.qcc.option.linker.libraries.1920046145" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
+								<option id="com.qnx.qcc.option.linker.libraries.1920046145" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="bbpim"/>
 								</option>
 							</tool>
@@ -157,7 +157,7 @@
 								<inputType id="com.qnx.qcc.inputType.assembler.44964578" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.linker.808157549" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
-								<option id="com.qnx.qcc.option.linker.libraries.1981649916" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
+								<option id="com.qnx.qcc.option.linker.libraries.1981649916" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="bbpim"/>
 								</option>
 							</tool>
@@ -175,20 +175,23 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="AdvCascadesLab.null.244776293" name="AdvCascadesLab"/>
 	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="1">
+		<resource resourceType="PROJECT" workspacePath="/advcascadeslab"/>
+	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.qnx.tools.ide.qde.managedbuilder.core.qccScannerInfo"/>
-		<scannerConfigBuildInfo instanceId="com.qnx.qcc.toolChain.258797817">
+		<scannerConfigBuildInfo instanceId="com.qnx.qcc.toolChain.417170893">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.qnx.tools.ide.qde.managedbuilder.core.qccScannerInfo"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="com.qnx.qcc.toolChain.2057069304">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.qnx.tools.ide.qde.managedbuilder.core.qccScannerInfo"/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.qnx.qcc.toolChain.417170893">
+		<scannerConfigBuildInfo instanceId="com.qnx.qcc.toolChain.258797817">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.qnx.tools.ide.qde.managedbuilder.core.qccScannerInfo"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="com.qnx.qcc.toolChain.552499196">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.qnx.tools.ide.qde.managedbuilder.core.qccScannerInfo"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
