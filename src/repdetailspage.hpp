@@ -16,8 +16,13 @@ public:
     virtual ~RepDetailsPage();
     bb::cascades::Page *rootNode() const;
     void setRepData(const QVariantMap &data);
+
+private slots:
+    void onShowFullPhoto();
+
 private:
     bb::cascades::Page *root_;
+    QVariantMap data_;
 };
 
 #endif /* REPDETAILSPAGE_HPP_ */

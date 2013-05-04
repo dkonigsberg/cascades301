@@ -4,32 +4,32 @@
 <context>
     <name>RepDetailsPage</name>
     <message>
-        <location filename="../assets/RepDetailsPage.qml" line="46"/>
+        <location filename="../assets/RepDetailsPage.qml" line="55"/>
         <source>Party:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RepDetailsPage.qml" line="66"/>
+        <location filename="../assets/RepDetailsPage.qml" line="75"/>
         <source>Notes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RepDetailsPage.qml" line="54"/>
+        <location filename="../assets/RepDetailsPage.qml" line="63"/>
         <source>Website:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RepDetailsPage.qml" line="50"/>
+        <location filename="../assets/RepDetailsPage.qml" line="59"/>
         <source>Committees:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RepDetailsPage.qml" line="58"/>
+        <location filename="../assets/RepDetailsPage.qml" line="67"/>
         <source>Phone number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/RepDetailsPage.qml" line="62"/>
+        <location filename="../assets/RepDetailsPage.qml" line="71"/>
         <source>Address:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -37,7 +37,7 @@
 <context>
     <name>RepListPage</name>
     <message>
-        <location filename="../assets/RepListPage.qml" line="44"/>
+        <location filename="../assets/RepListPage.qml" line="52"/>
         <source>Load Data</source>
         <translation type="unfinished"></translation>
     </message>

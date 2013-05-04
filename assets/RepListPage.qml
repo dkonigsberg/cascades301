@@ -2,11 +2,18 @@ import bb.cascades 1.0
 
 Page {
     id: page
+    property bool hasData: false
     property bool loadingData: false
     signal loadData()
     signal showDetails(variant dataItem)
     Container {
         layout: DockLayout {
+        }
+        ImageView {
+            visible: !hasData
+            imageSource: "asset:///images/house-logo.png"
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
         }
         ActivityIndicator {
             id: activityIndicator
@@ -19,14 +26,15 @@ Page {
         ListView {
             id: listView
             objectName: "listView"
-            visible: !activityIndicator.running
+            visible: !activityIndicator.running && hasData
             listItemComponents: [
                 ListItemComponent {
                     type: "item"
-                    StandardListItem {
+                    RepListItem {
                         title: ListItemData.displayName
                         description: ListItemData.role
                         status: ListItemData.party
+                        party: ListItemData.partyCode
                         image: ListItemData.photo
                     }
                 }

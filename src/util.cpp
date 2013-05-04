@@ -15,6 +15,16 @@ QVariantMap contactToMap(const bb::pim::contacts::Contact &contact, bool photoTo
     map["displayName"] = contact.displayName();
     map["party"] = contact.displayCompanyName();
 
+    if(contact.displayCompanyName().startsWith("Republican")) {
+        map["partyCode"] = "R";
+    }
+    else if(contact.displayCompanyName().startsWith("Democrat")) {
+        map["partyCode"] = "D";
+    }
+    else {
+        map["partyCode"] = "I";
+    }
+
     bb::pim::contacts::ContactPostalAddress address = contact.postalAddresses().first();
     if(address.isValid()) {
         QStringList addressLines;
@@ -62,8 +72,12 @@ QVariantMap contactToMap(const bb::pim::contacts::Contact &contact, bool photoTo
                 bb::cascades::Image image(photoData);
                 map["photo"] = QVariant(qMetaTypeId<bb::cascades::Image>(), &image);
             }
-            else {
-                map["photoData"] = photoData;
+            map["photoData"] = photoData;
+        }
+        else {
+            if(photoToImage) {
+                bb::cascades::Image image(QUrl("asset:///images/rep-default-thumb.png"));
+                map["photo"] = QVariant(qMetaTypeId<bb::cascades::Image>(), &image);
             }
         }
     }

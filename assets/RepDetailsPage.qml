@@ -1,6 +1,7 @@
 import bb.cascades 1.0
 
 Page {
+    id: page
     property alias photo: photoView.image
     property alias displayName: nameLabel.text
     property alias role: roleLabel.text
@@ -10,6 +11,7 @@ Page {
     property alias phoneNumber: phoneRow.valueText
     property alias address: addressRow.valueText
     property alias committees: committeesRow.valueText
+    signal showFullPhoto()
     Container {
         topPadding: 10
         leftPadding: 10
@@ -23,6 +25,13 @@ Page {
                 preferredWidth: 200
                 preferredHeight: 200
                 scalingMethod: ScalingMethod.AspectFit
+                gestureHandlers: [
+                    TapHandler {
+                        onTapped: {
+                            page.showFullPhoto()
+                        }
+                    }
+                ]
             }
             Container {
                 layoutProperties: StackLayoutProperties {

@@ -87,6 +87,7 @@ void RepFinder::onRequestFinished()
         qWarning() << "Network error:" << statusCode << networkReply->errorString();
     }
     rootPage_->setProperty("loadingData", false);
+    rootPage_->setProperty("hasData", dataModel_->childCount(QVariantList()) > 0);
 }
 
 QList<QString> RepFinder::vcardsFromData(const QByteArray &data)

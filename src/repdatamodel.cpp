@@ -108,9 +108,13 @@ void RepDataModel::onContactCardParsed()
     QVariantMap map = watcher->result();
     int index = watcher->property("dataIndex").toInt();
 
-    QByteArray photoData = map.take("photoData").toByteArray();
+    QByteArray photoData = map.value("photoData").toByteArray();
     if(!photoData.isNull()) {
         bb::cascades::Image image(photoData);
+        map["photo"] = QVariant(qMetaTypeId<bb::cascades::Image>(), &image);
+    }
+    else {
+        bb::cascades::Image image(QUrl("asset:///images/rep-default-thumb.png"));
         map["photo"] = QVariant(qMetaTypeId<bb::cascades::Image>(), &image);
     }
 
