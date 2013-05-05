@@ -63,7 +63,12 @@ void RepFinder::onLoadData()
     qDebug() << "RepFinder::onLoadData()";
     rootPage_->setProperty("loadingData", true);
 
-    QNetworkRequest request(QUrl("http://larkspur.greenviolet.net:9000/vcard"));
+    QUrl url("http://larkspur.greenviolet.net:9000");
+    url.setPath("/vcard");
+    //url.addQueryItem("encodeimage", "1");
+    //url.addQueryItem("limit", "10");
+
+    QNetworkRequest request(url);
     QNetworkReply *reply = accessManager_.get(request);
     connect(reply, SIGNAL(finished()), this, SLOT(onRequestFinished()));
 }
