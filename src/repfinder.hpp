@@ -30,6 +30,7 @@ private slots:
 private:
     QList<QString> vcardsFromData(const QByteArray &data);
     void populateDataModel(QList<QString> &vcards);
+    void populateSparseDataModel(const QVariantList &dataList);
     bb::cascades::NavigationPane *nav_;
     bb::cascades::Page *rootPage_;
     bb::cascades::DataModel *dataModel_;

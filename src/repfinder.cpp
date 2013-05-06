@@ -9,6 +9,7 @@
 #include <bb/cascades/Page>
 #include <bb/cascades/ListView>
 #include <bb/cascades/GroupDataModel>
+#include <bb/data/JsonDataAccess>
 #include <bb/pim/contacts/ContactService>
 #include <bb/pim/contacts/Contact>
 
@@ -20,6 +21,8 @@ using namespace bb::cascades;
 
 //#define USE_GROUPDATAMODEL
 #define USE_REPDATAMODEL
+//#define USE_FULL_FETCH
+#define USE_SPARSE_FETCH
 
 RepFinder::RepFinder(bb::cascades::Application *app)
     : QObject(app)
@@ -64,9 +67,15 @@ void RepFinder::onLoadData()
     rootPage_->setProperty("loadingData", true);
 
     QUrl url("http://larkspur.greenviolet.net:9000");
+#ifdef USE_FULL_FETCH
     url.setPath("/vcard");
     //url.addQueryItem("encodeimage", "1");
     //url.addQueryItem("limit", "10");
+#endif
+#ifdef USE_SPARSE_FETCH
+    url.setPath("/json");
+    url.addQueryItem("minimal", "1");
+#endif
 
     QNetworkRequest request(url);
     QNetworkReply *reply = accessManager_.get(request);
@@ -83,10 +92,18 @@ void RepFinder::onRequestFinished()
 
     if(statusCode == 200 && networkReply->error() == QNetworkReply::NoError) {
         const QByteArray data = networkReply->readAll();
+#ifdef USE_FULL_FETCH
         QList<QString> vcards = vcardsFromData(data);
         qDebug() << "Retrieved" << vcards.size() << "VCard records";
 
         populateDataModel(vcards);
+#endif
+#ifdef USE_SPARSE_FETCH
+        bb::data::JsonDataAccess json;
+        QVariantList dataList = json.loadFromBuffer(data).toList();
+        qDebug() << "Retrieved" << dataList.size() << "sparse records";
+        populateSparseDataModel(dataList);
+#endif
     }
     else {
         qWarning() << "Network error:" << statusCode << networkReply->errorString();
@@ -139,6 +156,21 @@ void RepFinder::populateDataModel(QList<QString> &vcards)
         repModel->appendVCard(vcard);
     }
 #endif
+}
+
+void RepFinder::populateSparseDataModel(const QVariantList &dataList)
+{
+    RepDataModel *repModel = qobject_cast<RepDataModel *>(dataModel_);
+    repModel->clear();
+    foreach(const QVariant &dataElement, dataList) {
+        const QVariantMap map = dataElement.toMap();
+        repModel->appendSparseElement(
+            map["id"].toString(),
+            map["name"].toString(),
+            map["state"].toString(),
+            map["district"].toString(),
+            map["party"].toString());
+    }
 }
 
 void RepFinder::onShowDetails(const QVariant &dataItem)
