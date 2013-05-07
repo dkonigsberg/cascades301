@@ -1,0 +1,1 @@
+include (../RepFinder.pro)
