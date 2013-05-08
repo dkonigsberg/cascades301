@@ -6,6 +6,19 @@
 namespace util
 {
 
+/*!
+ * Converts a Contact object, created by parsing a Rep VCard record, into
+ * something more generic and suitable for display in a ListView.
+ *
+ * Creating an Image is optional, because it can only be create on the main
+ * thread of the application. Creating an Image on another thread will cause
+ * the application to crash.
+ *
+ * @param contact The contact object to convert
+ * @param photoToImage true, if a displayable Cascades Image object should be
+ *     created as part of the conversion process
+ * @return the converted Rep
+ */
 QVariantMap contactToMap(const bb::pim::contacts::Contact &contact, bool photoToImage)
 {
     QVariantMap map;
@@ -40,6 +53,8 @@ QVariantMap contactToMap(const bb::pim::contacts::Contact &contact, bool photoTo
             .arg(address.postalCode());
     }
 
+    // Iterate through the attributes of the Contact, picking out specific
+    // fields we want to display.
     foreach(const bb::pim::contacts::ContactAttribute &attribute, contact.attributes()) {
         //qDebug() << "-->" << attribute.kind() << attribute.subKind() << attribute.attributeDisplayLabel() << attribute.value();
         if(attribute.kind() == bb::pim::contacts::AttributeKind::OrganizationAffiliation) {
@@ -62,6 +77,9 @@ QVariantMap contactToMap(const bb::pim::contacts::Contact &contact, bool photoTo
         }
     }
 
+    // The Contact photo is provided as a path to an image file. Since this
+    // may be temporary in the case of VCard parsing, and we need access to
+    // it later, read it into a byte array.
     const QString photoPath = contact.smallPhotoFilepath();
     if(!photoPath.isNull()) {
         QFile photoFile(photoPath);

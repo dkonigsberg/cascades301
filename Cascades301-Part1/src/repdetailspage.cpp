@@ -11,8 +11,9 @@ RepDetailsPage::RepDetailsPage(QObject *parent) : QObject(parent)
     qDebug() << "RepDetailsPage::RepDetailsPage()";
     QmlDocument *qml = QmlDocument::create("asset:///RepDetailsPage.qml").parent(this);
     root_ = qml->createRootObject<Page>();
+
+    // Makes sure this handler class gets deleted when the page is deleted
     connect(root_, SIGNAL(destroyed()), this, SLOT(deleteLater()));
-    connect(root_, SIGNAL(showFullPhoto()), this, SLOT(onShowFullPhoto()));
 }
 
 RepDetailsPage::~RepDetailsPage()
@@ -20,11 +21,19 @@ RepDetailsPage::~RepDetailsPage()
     qDebug() << "RepDetailsPage::~RepDetailsPage()";
 }
 
+/*!
+ * Returns the Cascades object for our page, so another class
+ * make it visible to the user.
+ */
 Page *RepDetailsPage::rootNode() const
 {
     return root_;
 }
 
+/*!
+ * Assign the various properties of our data map to the
+ * properties of our page.
+ */
 void RepDetailsPage::setRepData(const QVariantMap &data)
 {
     root_->setProperty("photo", data["photo"]);
